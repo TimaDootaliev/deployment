@@ -225,3 +225,14 @@ sudo systemctl restart nginx
 sudo ufw delete allow 8000
 sudo ufw allow 'Nginx Full'
 ```
+
+Чтобы работали static файлы, перейдите в корневую папку и введите там следующие команды
+
+```bash
+cd
+chmod 755 .
+```
+
+Если Вы сделали правильно, то теперь можно перейти по ip-address и попасть на свое django приложение
+
+![Alt text](images/your-ip-address.png)
