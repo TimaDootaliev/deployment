@@ -105,7 +105,7 @@ git clone <link_to_your_project>
 ```
 
 ```bash
-cd project_folder
+cd `project_folder`
 
 python3 -m venv venv
 
@@ -148,19 +148,19 @@ After=network.target
 [Service]
 User=sammy
 Group=www-data
-WorkingDirectory=/home/ubuntu/project_folder
-ExecStart=/home/sammy/project_folder/venv/bin/gunicorn \
+WorkingDirectory=/home/ubuntu/`project_folder`
+ExecStart=/home/sammy/`project_folder`/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
-          myproject.wsgi:application
+          `myproject`.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-project_folder - папка с проектом
-myproject - папка, в которой лежит файл settings.py
+`project_folder` - папка с проектом
+`myproject` - папка, в которой лежит файл settings.py
 
 
 Теперь мы можем запустить и активировать сокет Gunicorn.
@@ -176,24 +176,24 @@ sudo systemctl enable gunicorn.socket
 Для начала нужно создать и открыть новый серверный блок в каталоге Nginx sites-available:
 
 ```bash
-sudo nano /etc/nginx/sites-available/myproject
+sudo nano /etc/nginx/sites-available/`myproject`
 ```
 
 ```bash
-# /etc/nginx/sites-available/myproject
+# /etc/nginx/sites-available/`myproject`
 
 server {
     listen 80;
-    server_name ip-address;
+    server_name `ip-address`;
 
     location = /favicon.ico { access_log off; log_not_found off; }
 
     location /static/ {
-        root /home/ubuntu/project_folder;
+        root /home/ubuntu/`project_folder`;
     }
 
     location /media/ {
-        root /home/ubuntu/project_folder;
+        root /home/ubuntu/`project_folder`;
     }
 
     location / {
@@ -203,13 +203,13 @@ server {
 }
 ```
 
-ip-address вашего сервера вы можете найти в разделе Instances, выделив машинку галочкой и заглянув в раздел как на картинке
+``ip-address`` вашего сервера вы можете найти в разделе Instances, выделив машинку галочкой и заглянув в раздел как на картинке
 ![Alt text](images/ip_address.png)
 
 Теперь мы можем активировать файл, привязав его к каталогу sites-enabled:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/`myproject` /etc/nginx/sites-enabled
 ```
 
 Протестируйте конфигурацию Nginx на ошибки синтаксиса:
@@ -233,6 +233,6 @@ cd
 chmod 755 .
 ```
 
-Если Вы сделали правильно, то теперь можно перейти по ip-address и попасть на свое django приложение
+Если Вы сделали правильно, то теперь можно перейти по `ip-address` и попасть на свое django приложение
 
 ![Alt text](images/your-ip-address.png)
