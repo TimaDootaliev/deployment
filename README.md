@@ -108,6 +108,16 @@ git clone <link_to_your_project>
 cd `project_folder`
 
 python3 -m venv venv
+```
+
+Создайте файл с паролями и заполните его
+
+```bash
+touch .env
+```
+
+```bash
+source venv/bin/activate
 
 pip install -r requirements.txt gunicorn
 
